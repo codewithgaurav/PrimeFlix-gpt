@@ -1,12 +1,21 @@
 import { Link } from "react-router-dom";
 import Header from "./Header";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { validation } from "../utils/validation";
 
 const Login = () => {
   const [isSignIn, setSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const email = useRef(null);
+  const password = useRef(null);
 
   const handleClick = () => {
     setSignIn(!isSignIn);
+  };
+
+  const handleFormSubmit = () => {
+    const message = validation(email.current.value, password.current.value);
+    setErrorMessage(message);
   };
 
   return (
@@ -16,6 +25,7 @@ const Login = () => {
         <img src={import.meta.env.VITE_NETFLIX_BG_IMG} alt="Background-logo" />
       </div>
       <form
+        onSubmit={(e) => e.preventDefault()}
         className=" absolute
        left-1/2 top-1/2 m-auto w-3/12 -translate-x-1/2 -translate-y-1/2 bg-[#120F0A] p-12 text-white opacity-95"
       >
@@ -32,6 +42,7 @@ const Login = () => {
             />
           )}
           <input
+            ref={email}
             type="text"
             placeholder="Email or phone number"
             role="textbox"
@@ -39,6 +50,7 @@ const Login = () => {
           />
 
           <input
+            ref={password}
             type="password"
             placeholder="Password"
             role="textbox"
@@ -52,10 +64,11 @@ const Login = () => {
               className="m-2 mb-8 block w-80 rounded-sm bg-[#333333] p-2"
             />
           )}
+          <p className="px-2 text-sm text-red-500">{errorMessage}</p>
+
           <button
-            type="button"
             className="m-2 h-11 w-80 rounded-[4px] bg-[#E50914] text-base font-medium"
-            onClick={() => handleClick()}
+            onClick={() => handleFormSubmit()}
           >
             {isSignIn ? "Sign In" : "Sign up  "}
           </button>
