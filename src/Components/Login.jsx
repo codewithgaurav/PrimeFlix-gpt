@@ -1,13 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { useState, useRef } from "react";
 import { validation } from "../utils/validation";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignIn, setSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setSignIn(!isSignIn);
@@ -16,6 +27,62 @@ const Login = () => {
   const handleFormSubmit = () => {
     const message = validation(email.current.value, password.current.value);
     setErrorMessage(message);
+    if (message) return;
+
+    //Signin/up logic:
+    if (!isSignIn) {
+      //Signup Logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value,
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/109366319?v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, displayName, email, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  displayName: displayName,
+                  email: email,
+                  photoURL: photoURL,
+                }),
+              );
+              navigate("/browse");
+              // ...
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
+        })
+        .catch((error) => {
+          //const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value,
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          //const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage);
+        });
+    }
   };
 
   return (
@@ -35,10 +102,11 @@ const Login = () => {
           </h1>
           {!isSignIn && (
             <input
+              ref={name}
               type="text"
               placeholder="Full Name"
               role="textbox"
-              className="m-2 mb-8 block w-80 rounded-sm bg-[#333333] p-2"
+              className="m-2 mb-8 block w-[95%] rounded-sm bg-[#333333] p-2"
             />
           )}
           <input
@@ -46,7 +114,7 @@ const Login = () => {
             type="text"
             placeholder="Email or phone number"
             role="textbox"
-            className="m-2 my-8 block w-80 rounded-sm bg-[#333333] p-2 "
+            className="m-2 my-8 block w-[95%] rounded-sm bg-[#333333] p-2 "
           />
 
           <input
@@ -54,20 +122,20 @@ const Login = () => {
             type="password"
             placeholder="Password"
             role="textbox"
-            className="m-2 mb-8 block w-80 rounded-sm bg-[#333333] p-2"
+            className="m-2 mb-8 block w-[95%] rounded-sm bg-[#333333] p-2"
           />
           {!isSignIn && (
             <input
               type="password"
               placeholder="Confirm password"
               role="textbox"
-              className="m-2 mb-8 block w-80 rounded-sm bg-[#333333] p-2"
+              className="m-2 mb-8 block w-[95%] rounded-sm bg-[#333333] p-2"
             />
           )}
           <p className="px-2 text-sm text-red-500">{errorMessage}</p>
 
           <button
-            className="m-2 h-11 w-80 rounded-[4px] bg-[#E50914] text-base font-medium"
+            className="m-2 h-11 w-[95%] rounded-[4px] bg-[#E50914] text-base font-medium"
             onClick={() => handleFormSubmit()}
           >
             {isSignIn ? "Sign In" : "Sign up  "}
