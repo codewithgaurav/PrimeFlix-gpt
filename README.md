@@ -2,9 +2,6 @@
 
 - Created a react app using vite.
 - Configured Tailwind Css.
-
-# Features
-
 - Header
 - Browse (after Authentication)
 - LogIn/ Sing Up form
@@ -15,21 +12,29 @@
 - Create Signup user account in firebase
 - Implement Signin User API
 - Created Redux Store with UserSlice
+- Implemented Signout
+- Update Profile
+- BugFix: Signup User and profile picture update
+- BugFix: If the user is not logged in redirect to login page and vice versa
+- Unscribed to the onAuthStateChanged callback
 
-  - Header
+# Features
 
-    - Nav Bar
-    - Search Bar
-    - Signedin User
+- Header
 
-  - Promoted Movie
+  - Nav Bar
+  - Search Bar
+  - Signedin User
 
-    - Trailer in Background
-    - Title
-    - Description
+- Promoted Movie
 
-  - Movie Suggestions
-    - Rows of Movies of different categories
+  - Trailer in Background
+  - Title
+  - Description
+
+- Movie Suggestions
+
+  - Rows of Movies of different categories
 
 - Netflix gpt
   - Search Bar

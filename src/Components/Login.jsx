@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Header from "./Header";
 import { useState, useRef } from "react";
 import { validation } from "../utils/validation";
@@ -10,6 +10,7 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { VITE_NETFLIX_BG_IMG, VITE_PHOTO_URL } from "../utils/constants";
 
 const Login = () => {
   const [isSignIn, setSignIn] = useState(true);
@@ -18,7 +19,6 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleClick = () => {
     setSignIn(!isSignIn);
@@ -41,7 +41,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/109366319?v=4",
+            photoURL: VITE_PHOTO_URL,
           })
             .then(() => {
               // Profile updated!
@@ -54,8 +54,6 @@ const Login = () => {
                   photoURL: photoURL,
                 }),
               );
-              navigate("/browse");
-              // ...
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -74,8 +72,6 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           //const errorCode = error.code;
@@ -89,7 +85,7 @@ const Login = () => {
     <div className="bg-gradient-to-b from-black">
       <Header />
       <div className="absolute">
-        <img src={import.meta.env.VITE_NETFLIX_BG_IMG} alt="Background-logo" />
+        <img src={VITE_NETFLIX_BG_IMG} alt="Background-logo" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
