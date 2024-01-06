@@ -17,6 +17,17 @@
 - BugFix: Signup User and profile picture update
 - BugFix: If the user is not logged in redirect to login page and vice versa
 - Unscribed to the onAuthStateChanged callback
+- Add hardcoded values to the constant file
+- Register with TMDb api and, created an app & got access token,
+- Get data from tmdb now playing movies API List,
+- Custom hook for fetching now playing movies
+- Create Movie Slice
+- Update store with movie data
+- Planning for main container and secondary container
+- Fetch Data for trailer video
+- update store with trailer video data
+- embeded the youtube video and ran it at autoplay and mute
+- implemented css to make main container visually appealing
 
 # Features
 

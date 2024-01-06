@@ -90,7 +90,7 @@ const Login = () => {
       <form
         onSubmit={(e) => e.preventDefault()}
         className=" absolute
-       left-1/2 top-1/2 m-auto w-3/12 -translate-x-1/2 -translate-y-1/2 bg-[#120F0A] p-12 text-white opacity-95"
+      left-0 right-0 m-auto my-[10%] w-3/12  bg-[#120F0A] p-12 text-white opacity-95"
       >
         <div>
           <h1 className="mx-2 text-3xl">

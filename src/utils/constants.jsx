@@ -4,6 +4,12 @@ export const VITE_NETFLIX_LOGO = `https://cdn.cookielaw.org/logos/dd6b162f-1a32-
 
 export const VITE_PHOTO_URL = `https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png`;
 
+export const TMDB_API = "https://api.themoviedb.org/3/movie/now_playing?page=1";
+
+export const VIDEO_API = "https://api.themoviedb.org/3/movie/";
+
+export const TRAILER_YOUTUBE = "https://www.youtube.com/embed/";
+
 export const options = {
   method: "GET",
   headers: {
