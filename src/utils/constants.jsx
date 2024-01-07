@@ -4,11 +4,31 @@ export const VITE_NETFLIX_LOGO = `https://cdn.cookielaw.org/logos/dd6b162f-1a32-
 
 export const VITE_PHOTO_URL = `https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png`;
 
-export const TMDB_API = "https://api.themoviedb.org/3/movie/now_playing?page=1";
-
 export const VIDEO_API = "https://api.themoviedb.org/3/movie/";
 
 export const TRAILER_YOUTUBE = "https://www.youtube.com/embed/";
+
+export const IMG_POSTER = "https://image.tmdb.org/t/p/w500";
+
+export const TMDB_API = "https://api.themoviedb.org/3/movie/now_playing?page=1";
+
+export const TMDB_POPULAR_API =
+  "https://api.themoviedb.org/3/movie/popular?page=1";
+
+export const TMDB_TOPRATED_API =
+  "https://api.themoviedb.org/3/movie/top_rated?page=1";
+
+export const TMDB_UPCOMING_API =
+  "https://api.themoviedb.org/3/movie/upcoming?page=1";
+
+export const TMDB_TVSHOWSAIRING_API =
+  "https://api.themoviedb.org/3/tv/airing_today?&page=1";
+
+export const TMDB_TRENDINGMOVIES_API =
+  "https://api.themoviedb.org/3/trending/movie/day";
+
+export const TMDB_TRENDINGTVSHOWS_API =
+  "https://api.themoviedb.org/3/trending/tv/day";
 
 export const options = {
   method: "GET",

@@ -28,6 +28,11 @@
 - update store with trailer video data
 - embeded the youtube video and ran it at autoplay and mute
 - implemented css to make main container visually appealing
+- Build Secondary Component
+- Build Movie List
+- TMDB image CDN URL
+- Made the browse page amazing with tailwind
+- Implemented multiple categories with custom hooks
 
 # Features
 

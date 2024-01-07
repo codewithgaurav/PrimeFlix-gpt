@@ -9,7 +9,7 @@ const useNowPlayingMovies = () => {
   const getNowPlayingMovies = async () => {
     const fetchData = await fetch(TMDB_API, options);
     const response = await fetchData.json();
-    console.log(response.results);
+    // console.log(response.results);
 
     dispatch(addNowPlayingMovies(response.results));
   };
